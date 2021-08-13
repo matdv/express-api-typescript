@@ -2,6 +2,9 @@ import express from 'express';
 import createError from 'http-errors';
 import expressOasGenerator, { SPEC_OUTPUT_FILE_BEHAVIOR } from 'express-oas-generator';
 import { userRouter } from './routes/userRoutes';
+import compression from 'compression';
+import cors from 'cors';
+import helmet from 'helmet';
 
 const PORT = 5050;
 const SWAGGERPATH = 'swagger';
@@ -14,6 +17,10 @@ expressOasGenerator.handleResponses(app, {
   specOutputFileBehavior: SPEC_OUTPUT_FILE_BEHAVIOR.RECREATE
 });
 
+
+app.use(helmet()); // protect against vulnerabilities
+app.use(cors());
+app.use(compression()); // use gzip, deflate
 
 /** initialize your `app` and routes */
 app.use('/user', userRouter);

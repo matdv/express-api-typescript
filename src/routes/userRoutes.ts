@@ -4,5 +4,5 @@ export const userRouter = express.Router();
 
 // get users
 userRouter.get('/', (req, res) => {
-    res.json({ name: 'john do' });
+    res.json({ name: 'john doe' });
 });
